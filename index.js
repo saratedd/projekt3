@@ -1,16 +1,6 @@
-// var myCanvas = document.getElementById("myCanvas");
-// var ctx = myCanvas.getContext("2d");
 
-
-// ctx.fillStyle = "#FF0000";
-// ctx.fillRect(0, 0, 200, 200)
-
-var c = document.getElementById("myTextCanvas");
-var ctx = c.getContext("2d");
-ctx.font = "20px Verdana";
 var gen = Math.ceil(Math.random() * 7);
 var pog = 0
-ctx.fillText("Generirane: " + gen + " Pogođene: " + pog, 10, 30);
 
 
 var myGamePiece = [];
@@ -18,7 +8,7 @@ var myGamePiece = [];
 function startGame() {
     for (i = 0; i < gen; i++) {
         var speed = Math.ceil(Math.random() * 7)
-        myGamePiece[i] = new component(40, 40, "red", Math.ceil(Math.random() * 760), Math.ceil(Math.random() * 760),
+        myGamePiece[i] = new component(90, 90, "red", Math.ceil(Math.random() * 760), Math.ceil(Math.random() * 760),
             speed);
     }
     myGameArea.start();
@@ -34,9 +24,6 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
-        this.context.font = "20px Verdana";
-        this.context.textAlign = "left";
-        updateText()
     },
     stop : function() {
         clearInterval(this.interval);
@@ -77,14 +64,45 @@ function component(width, height, color, x, y, speed, type) {
     }
 }
 
-function updateText() {
-    this.context.fillText("Generirane: " + 0 + "\nPogođene: " + 0, 510, 30);
-}
+
+// document.getElementById("myGameCanvas").addEventListener('click', (e) => {
+//     var x = e.clientX
+//     var y = e.clientY
+//     for (i = 0; i < gen-pog; i++) {
+//         if (myGamePiece[i].x >= x && (myGamePiece[i].x + width) <= x) {
+//             if (myGamePiece[i].y >= y && (myGamePiece[i].y + height) <= y) {
+//                 console.log('hit')
+//             }
+//         }
+//     }
+// })
 
 function updateGameArea() {
     myGameArea.clear();
+    // document.getElementById("myGameCanvas").addEventListener('click', (e) => {
+        //     var x = e.clientX
+        //     var y = e.clientY
+        //     console.log('klik ', x, y);
+        //     for (i = 0; i < gen-pog; i++) {
+            //         console.log(myGamePiece[i].x, myGamePiece[i].x + myGamePiece[i].width)
+            //         console.log(myGamePiece[i].y, myGamePiece[i].y + myGamePiece[i].height);
+            //         if (myGamePiece[i].x >= x && (myGamePiece[i].x + myGamePiece[i].width) <= x) {
+                //             if (myGamePiece[i].y >= y && (myGamePiece[i].y + myGamePiece[i].height) <= y) {
+                    //                 console.log('hit')
+                    //             }
+                    //             else {
+                        //                 console.log('not hit');
+                        //             }
+                        //         } else {
+                            //             console.log('not hit');
+    //         }
+    //     }
+    // })
     for (i = 0; i < gen; i++) {
         myGamePiece[i].newPos();
         myGamePiece[i].update();
     }
+    myGameArea.context.font = "20px Verdana";
+    myGameArea.context.textAlign = "left";
+    myGameArea.context.fillText("Generirane: " + 0 + "\nPogođene: " + 0, 510, 30);
 }
