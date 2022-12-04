@@ -80,16 +80,16 @@ function updateGameArea() {
                 (myGamePiece[i].y - myGamePiece[i].height / 2) <= y &&
                 (myGamePiece[i].y + myGamePiece[i].height / 2) >= y
                 ) {
-                    console.log('hit');
+                    // console.log('hit');
                     pog++
                     myGamePiece.splice(i, 1)
                     break
-            } else {
-                console.log('not hit');
+            // } else {
+            //     console.log('not hit');
             }
         }
     })
-    for (i = 0; i < gen; i++) {
+    for (i = 0; i < gen-pog; i++) {
         myGamePiece[i].newPos();
         myGamePiece[i].update();
     }
