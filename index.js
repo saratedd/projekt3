@@ -16,8 +16,11 @@ ctx.fillText("Generirane: " + gen + "\nPogođene: " + pog, 10, 30);
 var myGamePiece = [];
 
 function startGame() {
-    for (i = 0; i < gen; i++)
-        myGamePiece[i] = new component(40, 40, "red", Math.ceil(Math.random() * 760), Math.ceil(Math.random() * 760));
+    for (i = 0; i < gen; i++) {
+        var speed = Math.ceil(Math.random() * 7)
+        myGamePiece[i] = new component(40, 40, "red", Math.ceil(Math.random() * 760), Math.ceil(Math.random() * 760),
+            speed);
+    }
     myGameArea.start();
 }
 
@@ -40,12 +43,12 @@ var myGameArea = {
     }
 }
 
-function component(width, height, color, x, y, type) {
+function component(width, height, color, x, y, speed, type) {
     this.type = type;
     this.width = width;
     this.height = height;
-    this.speed_x = 2;
-    this.speed_y = 2;
+    this.speed_x = speed;
+    this.speed_y = speed;
     this.x = x;
     this.y = y;
     this.update = function() {
@@ -57,14 +60,15 @@ function component(width, height, color, x, y, type) {
         ctx.restore();
     }
     this.newPos = function() {
+        var speed = Math.ceil(Math.random() * 7)
         if (this.x - this.width / 2 < 0)
-        this.speed_x = 2;
+        this.speed_x = speed;
         else if ((this.x + this.width / 2) >= myGameArea.context.canvas.width)
-        this.speed_x = -2;
+        this.speed_x = -speed;
         if (this.y - this.height / 2 < 0)
-        this.speed_y = -2;
+        this.speed_y = -speed;
         else if ((this.y + this.height / 2) >= myGameArea.context.canvas.height)
-        this.speed_y = 2;
+        this.speed_y = speed;
         this.x += this.speed_x;
         this.y -= this.speed_y;
     }
