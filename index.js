@@ -5,10 +5,19 @@
 // ctx.fillStyle = "#FF0000";
 // ctx.fillRect(0, 0, 200, 200)
 
-var gmPiece
+var c = document.getElementById("myTextCanvas");
+var ctx = c.getContext("2d");
+ctx.font = "20px Verdana";
+var gen = Math.ceil(Math.random() * 7);
+var pog = 0
+ctx.fillText("Generirane: " + gen + "\nPogođene: " + pog, 10, 30);
+
+
+var myGamePiece = [];
 
 function startGame() {
-    gmPiece = new component(30, 30, "red", 150, 150);
+    for (i = 0; i < gen; i++)
+        myGamePiece[i] = new component(40, 40, "red", Math.ceil(Math.random() * 760), Math.ceil(Math.random() * 760));
     myGameArea.start();
 }
 
@@ -16,8 +25,8 @@ var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
         this.canvas.id = "myGameCanvas";
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.width = 800// 480;
+        this.canvas.height = 800// 270;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -58,5 +67,13 @@ function component(width, height, color, x, y, type) {
         this.speed_y = 2;
         this.x += this.speed_x;
         this.y -= this.speed_y;
+    }
+}
+
+function updateGameArea() {
+    myGameArea.clear();
+    for (i = 0; i < gen; i++) {
+        myGamePiece[i].newPos();
+        myGamePiece[i].update();
     }
 }
