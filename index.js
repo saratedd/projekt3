@@ -8,7 +8,7 @@ var myGamePiece = [];
 function startGame() {
     for (i = 0; i < gen; i++) {
         var speed = Math.ceil(Math.random() * 7)
-        myGamePiece[i] = new component(90, 90, "red", Math.ceil(Math.random() * 760), Math.ceil(Math.random() * 760),
+        myGamePiece[i] = new component(90, 90, "#FFA200", Math.ceil(Math.random() * 760), Math.ceil(Math.random() * 760),
             speed);
     }
     myGameArea.start();
