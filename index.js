@@ -65,44 +65,35 @@ function component(width, height, color, x, y, speed, type) {
 }
 
 
-// document.getElementById("myGameCanvas").addEventListener('click', (e) => {
-//     var x = e.clientX
-//     var y = e.clientY
-//     for (i = 0; i < gen-pog; i++) {
-//         if (myGamePiece[i].x >= x && (myGamePiece[i].x + width) <= x) {
-//             if (myGamePiece[i].y >= y && (myGamePiece[i].y + height) <= y) {
-//                 console.log('hit')
-//             }
-//         }
-//     }
-// })
 
 function updateGameArea() {
     myGameArea.clear();
-    // document.getElementById("myGameCanvas").addEventListener('click', (e) => {
-        //     var x = e.clientX
-        //     var y = e.clientY
-        //     console.log('klik ', x, y);
-        //     for (i = 0; i < gen-pog; i++) {
-            //         console.log(myGamePiece[i].x, myGamePiece[i].x + myGamePiece[i].width)
-            //         console.log(myGamePiece[i].y, myGamePiece[i].y + myGamePiece[i].height);
-            //         if (myGamePiece[i].x >= x && (myGamePiece[i].x + myGamePiece[i].width) <= x) {
-                //             if (myGamePiece[i].y >= y && (myGamePiece[i].y + myGamePiece[i].height) <= y) {
-                    //                 console.log('hit')
-                    //             }
-                    //             else {
-                        //                 console.log('not hit');
-                        //             }
-                        //         } else {
-                            //             console.log('not hit');
-    //         }
-    //     }
-    // })
+    document.getElementById("myGameCanvas").addEventListener('click', (e) => {
+        var x = e.clientX
+        var y = e.clientY
+        console.log('klik ', x, y);
+        for (i = 0; i < gen-pog; i++) {
+            console.log(myGamePiece[i].x, myGamePiece[i].x + myGamePiece[i].width)
+            console.log(myGamePiece[i].y, myGamePiece[i].y + myGamePiece[i].height);
+            if ((myGamePiece[i].x - myGamePiece[i].width / 2) <= x &&
+                (myGamePiece[i].x + myGamePiece[i].width / 2) >= x &&
+                (myGamePiece[i].y - myGamePiece[i].height / 2) <= y &&
+                (myGamePiece[i].y + myGamePiece[i].height / 2) >= y
+                ) {
+                    console.log('hit');
+                    pog++
+                    myGamePiece.splice(i, 1)
+                    break
+            } else {
+                console.log('not hit');
+            }
+        }
+    })
     for (i = 0; i < gen; i++) {
         myGamePiece[i].newPos();
         myGamePiece[i].update();
     }
     myGameArea.context.font = "20px Verdana";
     myGameArea.context.textAlign = "left";
-    myGameArea.context.fillText("Generirane: " + 0 + "\nPogođene: " + 0, 510, 30);
+    myGameArea.context.fillText("Generirane: " + gen + "\nPogođene: " + pog, 510, 30);
 }
