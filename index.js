@@ -10,7 +10,7 @@ var ctx = c.getContext("2d");
 ctx.font = "20px Verdana";
 var gen = Math.ceil(Math.random() * 7);
 var pog = 0
-ctx.fillText("Generirane: " + gen + "\nPogođene: " + pog, 10, 30);
+ctx.fillText("Generirane: " + gen + " Pogođene: " + pog, 10, 30);
 
 
 var myGamePiece = [];
@@ -34,6 +34,9 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
+        this.context.font = "20px Verdana";
+        this.context.textAlign = "left";
+        updateText()
     },
     stop : function() {
         clearInterval(this.interval);
@@ -72,6 +75,10 @@ function component(width, height, color, x, y, speed, type) {
         this.x += this.speed_x;
         this.y -= this.speed_y;
     }
+}
+
+function updateText() {
+    this.context.fillText("Generirane: " + 0 + "\nPogođene: " + 0, 510, 30);
 }
 
 function updateGameArea() {
